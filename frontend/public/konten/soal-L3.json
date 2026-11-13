@@ -1,0 +1,69 @@
+[
+  {
+    "id": "L3-01",
+    "level": 3,
+    "modul": "M4",
+    "jenis": "aljabar",
+    "soal": "-2x > 8",
+    "semesta": "real",
+    "jawaban": { "tanda": "<", "nilai": "-4" },
+    "langkah": [
+      { "ekspresi": "-2x > 8", "penjelasan": "Soal awal." },
+      { "ekspresi": "x < -4", "operasi": { "jenis": "bagi", "nilai": "-2" }, "penjelasan": "Bagi kedua ruas dengan -2 (negatif), tanda dibalik.", "kunci": true }
+    ],
+    "petunjuk": [
+      "Untuk mendapatkan x saja, kedua ruas dibagi berapa?",
+      "Kamu membagi dengan -2. Bilangan itu positif atau negatif?",
+      "Lihat kartu aturan: bagi bilangan negatif berarti tanda dibalik."
+    ],
+    "salah_umum": [
+      { "kode": "E1", "jawaban": { "tanda": ">", "nilai": "-4" } },
+      { "kode": "E3", "jawaban": { "tanda": "<", "nilai": "4" } }
+    ]
+  },
+  {
+    "id": "L3-02",
+    "level": 3,
+    "modul": "M4",
+    "jenis": "aljabar",
+    "soal": "-3x + 5 <= 11",
+    "semesta": "real",
+    "jawaban": { "tanda": ">=", "nilai": "-2" },
+    "langkah": [
+      { "ekspresi": "-3x + 5 <= 11", "penjelasan": "Soal awal." },
+      { "ekspresi": "-3x <= 6", "operasi": { "jenis": "kurang", "nilai": "5" }, "penjelasan": "Kurangi kedua ruas dengan 5. Tanda tetap." },
+      { "ekspresi": "x >= -2", "operasi": { "jenis": "bagi", "nilai": "-3" }, "penjelasan": "Bagi dengan -3 (negatif), tanda dibalik.", "kunci": true }
+    ],
+    "petunjuk": [
+      "Suku mana yang mengandung x? Pindahkan konstanta dulu.",
+      "Kamu akan membagi dengan -3. Bilangan itu positif atau negatif?",
+      "Lihat contoh serupa: -2x > 8."
+    ],
+    "salah_umum": [
+      { "kode": "E1", "jawaban": { "tanda": "<=", "nilai": "-2" } },
+      { "kode": "E3", "jawaban": { "tanda": ">=", "nilai": "2" } }
+    ],
+    "prompt_penjelasan": {
+      "pertanyaan": "Mengapa tanda <= berubah menjadi >=?",
+      "opsi": ["Karena dikurangi 5", "Karena dibagi bilangan negatif", "Karena hasilnya negatif"],
+      "benar": 1
+    }
+  },
+  {
+    "id": "L3-03",
+    "level": 3,
+    "modul": "M4",
+    "jenis": "aljabar",
+    "soal": "7 - x < 10",
+    "semesta": "real",
+    "jawaban": { "tanda": ">", "nilai": "-3" },
+    "langkah": [
+      { "ekspresi": "7 - x < 10", "penjelasan": "Soal awal." },
+      { "ekspresi": "-x < 3", "operasi": { "jenis": "kurang", "nilai": "7" }, "penjelasan": "Kurangi kedua ruas dengan 7. Tanda tetap." },
+      { "ekspresi": "x > -3", "operasi": { "jenis": "kali", "nilai": "-1" }, "penjelasan": "Kalikan kedua ruas dengan -1 (negatif), tanda dibalik.", "kunci": true }
+    ],
+    "salah_umum": [
+      { "kode": "E1", "jawaban": { "tanda": "<", "nilai": "-3" } }
+    ]
+  }
+]

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bank soal PtLSV",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "level", "modul", "jenis", "soal", "semesta", "jawaban"],
+    "properties": {
+      "id": { "type": "string", "pattern": "^L[1-5]-[0-9]{2}$" },
+      "level": { "type": "integer", "minimum": 1, "maximum": 5 },
+      "modul": { "type": "string", "pattern": "^M[0-6]$" },
+      "jenis": { "enum": ["aljabar", "cerita"] },
+      "soal": { "type": "string", "minLength": 3 },
+      "teks": { "type": "string" },
+      "model": { "type": "string" },
+      "variabel": { "type": "string" },
+      "semesta": { "enum": ["real", "bulat", "cacah", "asli"] },
+      "jawaban": { "$ref": "#/$defs/jawaban" },
+      "langkah": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["ekspresi", "penjelasan"],
+          "properties": {
+            "ekspresi": { "type": "string" },
+            "penjelasan": { "type": "string" },
+            "operasi": {
+              "type": "object",
+              "required": ["jenis", "nilai"],
+              "properties": {
+                "jenis": { "enum": ["tambah", "kurang", "kali", "bagi", "uraikan", "pindah"] },
+                "nilai": { "type": "string" }
+              }
+            },
+            "kunci": { "type": "boolean" }
+          }
+        }
+      },
+      "petunjuk": { "type": "array", "items": { "type": "string" }, "maxItems": 3 },
+      "salah_umum": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["kode", "jawaban"],
+          "properties": {
+            "kode": { "type": "string", "pattern": "^E[1-8]$" },
+            "jawaban": { "$ref": "#/$defs/jawaban" }
+          }
+        }
+      },
+      "prompt_penjelasan": {
+        "type": "object",
+        "required": ["pertanyaan", "opsi", "benar"],
+        "properties": {
+          "pertanyaan": { "type": "string" },
+          "opsi": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+          "benar": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "token_penting": { "type": "array", "items": { "type": "string" } },
+      "opsi_model": { "type": "array", "items": { "type": "string" } },
+      "tafsiran": { "type": "string" }
+    },
+    "if": { "properties": { "jenis": { "const": "cerita" } } },
+    "then": { "required": ["teks", "model", "tafsiran"] }
+  },
+  "$defs": {
+    "jawaban": {
+      "type": "object",
+      "required": ["tanda", "nilai"],
+      "properties": {
+        "tanda": { "enum": ["<", ">", "<=", ">="] },
+        "nilai": { "type": "string", "pattern": "^-?[0-9]+(/[0-9]+)?$" }
+      }
+    }
+  }
+}

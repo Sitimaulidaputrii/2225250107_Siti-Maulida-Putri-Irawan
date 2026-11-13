@@ -1,0 +1,25 @@
+[
+  {
+    "id": "L5-01",
+    "level": 5,
+    "modul": "M6",
+    "jenis": "cerita",
+    "soal": "Banyak buku tulis paling banyak yang dapat dibeli Budi",
+    "teks": "Budi membawa uang Rp50.000. Ia membeli sebuah kotak pensil seharga Rp14.000 dan beberapa buku tulis seharga Rp4.000 per buah. Berapa paling banyak buku tulis yang dapat dibeli Budi?",
+    "token_penting": ["Rp50.000", "Rp14.000", "Rp4.000", "paling banyak"],
+    "variabel": "x = banyak buku tulis",
+    "model": "14000 + 4000x <= 50000",
+    "opsi_model": ["14000 + 4000x <= 50000", "14000 + 4000x >= 50000", "4000 + 14000x <= 50000"],
+    "semesta": "cacah",
+    "jawaban": { "tanda": "<=", "nilai": "9" },
+    "langkah": [
+      { "ekspresi": "14000 + 4000x <= 50000", "penjelasan": "Total belanja tidak boleh melebihi uang Budi." },
+      { "ekspresi": "4000x <= 36000", "operasi": { "jenis": "kurang", "nilai": "14000" }, "penjelasan": "Kurangi kedua ruas dengan 14.000." },
+      { "ekspresi": "x <= 9", "operasi": { "jenis": "bagi", "nilai": "4000" }, "penjelasan": "Bagi dengan 4.000 (positif), tanda tetap.", "kunci": true }
+    ],
+    "salah_umum": [
+      { "kode": "E7", "jawaban": { "tanda": ">=", "nilai": "9" } }
+    ],
+    "tafsiran": "Budi dapat membeli paling banyak 9 buku tulis."
+  }
+]

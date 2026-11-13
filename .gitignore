@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.db
+.env
+
+# Node / Vite
+node_modules/
+frontend/dist/
+frontend/dev-dist/
+silang/
+
+# Editor & OS
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
