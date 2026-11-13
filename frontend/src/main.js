@@ -1,8 +1,13 @@
 import './styles/main.css';
+import './styles/komponen.css';
 import { registerSW } from 'virtual:pwa-register';
+import { bukaKartuAturan } from './components/kartuAturan.js';
 import { buatRouter } from './router.js';
 import { beranda } from './views/beranda.js';
-import { modul, tentang, tidakDitemukan } from './views/lainnya.js';
+import { tentang, tidakDitemukan } from './views/lainnya.js';
+import { modul } from './views/modul.js';
+
+document.getElementById('tombol-aturan').addEventListener('click', bukaKartuAturan);
 
 buatRouter(
   { beranda, modul, tentang, tidakDitemukan },

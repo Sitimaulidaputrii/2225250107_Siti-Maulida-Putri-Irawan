@@ -74,4 +74,18 @@ node tools/ekspor_soal_acak.mjs silang 100
 python tools/validasi_soal.py "silang/soal-acak-*.json"
 ```
 
-Berikutnya — **Sprint 2:** komponen tampilan (garis bilangan SVG, papan tanda, langkah-demi-langkah, kartu aturan) dan layar M0–M3.
+**Sprint 2 selesai:** komponen tampilan dan modul M0–M3 dapat dipelajari penuh (offline).
+
+| Komponen | Fungsi |
+|----------|--------|
+| [garisBilangan.js](frontend/src/components/garisBilangan.js) | Garis bilangan SVG statis & interaktif (titik, bulatan, arah) |
+| [papanTanda.js](frontend/src/components/papanTanda.js) | Tombol < > ≤ ≥ + papan angka; juga papan ketik fisik |
+| [langkahDemiLangkah.js](frontend/src/components/langkahDemiLangkah.js) | Contoh dibuka satu langkah per ketukan + garis bilangan + cek substitusi |
+| [soal.js](frontend/src/components/soal.js) | Butir: pilihan, isian, memenuhi, jawab, garis, bandingkan |
+| [latihan.js](frontend/src/components/latihan.js) | Latihan adaptif (fading), petunjuk 3 tingkat, diagnosis kesalahan |
+| [kartuAturan.js](frontend/src/components/kartuAturan.js) | Kartu ringkas, dibuka dari tombol **?** di setiap layar |
+| [views/modul.js](frontend/src/views/modul.js) | Pemutar modul: materi, contoh, latihan, kuis (+ remedial) |
+
+Konten modul ada di `frontend/public/konten/modul-M*.json` dan divalidasi otomatis oleh `npm test`.
+
+Berikutnya — **Sprint 3:** M4 Kali & Bagi (fokus utama), Lab Garis Bilangan, contoh berpasangan.

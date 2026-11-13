@@ -1,0 +1,74 @@
+{
+  "id": "M3",
+  "judul": "Tambah & Kurang Kedua Ruas",
+  "tujuan": "Menerapkan sifat penjumlahan dan pengurangan kedua ruas tanpa mengubah tanda.",
+  "bagian": [
+    {
+      "jenis": "materi",
+      "judul": "Coba dulu",
+      "segmen": [
+        {
+          "judul": "Eksperimen 1",
+          "teks": ["Kita mulai dari pernyataan yang benar, lalu tambahkan bilangan yang sama ke kedua ruas."],
+          "aktivitas": { "tipe": "bandingkan", "kiri": "3", "kanan": "5", "operasi": { "jenis": "tambah", "nilai": "4" } }
+        },
+        {
+          "judul": "Eksperimen 2",
+          "teks": ["Sekarang kurangi kedua ruas dengan bilangan yang cukup besar."],
+          "aktivitas": { "tipe": "bandingkan", "kiri": "3", "kanan": "5", "operasi": { "jenis": "kurang", "nilai": "10" } }
+        },
+        {
+          "judul": "Eksperimen 3",
+          "teks": ["Coba lagi dengan bilangan negatif."],
+          "aktivitas": { "tipe": "bandingkan", "kiri": "-2", "kanan": "-6", "operasi": { "jenis": "tambah", "nilai": "-3" } }
+        },
+        {
+          "judul": "Kesimpulan",
+          "teks": ["Menambah atau mengurangi kedua ruas dengan bilangan yang **sama** tidak mengubah tanda."],
+          "visual": { "jenis": "rumus", "baris": ["Jika $a < b$, maka $a + c < b + c$", "Jika $a < b$, maka $a - c < b - c$"] }
+        },
+        {
+          "judul": "Memindahkan suku",
+          "teks": [
+            "Memindahkan suku ke ruas lain sama saja dengan mengurangi atau menambah kedua ruas.",
+            "**Tanda tetap**; yang berubah hanya operasinya: + menjadi −, dan − menjadi +."
+          ],
+          "visual": { "jenis": "rumus", "baris": ["$x + 5 > 12$", "$x > 12 - 5$", "$x > 7$"] }
+        }
+      ]
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Contoh",
+      "soal": "x + 5 > 12",
+      "pengantar": "Ketuk **Langkah berikutnya** untuk membuka setiap langkah.",
+      "prompt": {
+        "pertanyaan": "Mengapa tanda > tidak berubah?",
+        "opsi": ["Karena kedua ruas hanya dikurangi 5", "Karena 12 lebih besar dari 5", "Karena x selalu positif"],
+        "benar": 0,
+        "umpan": [null, "Bukan karena besar kecilnya angka. Lihat operasi yang dilakukan pada kedua ruas.", "x bisa bernilai negatif. Lihat operasi yang dilakukan pada kedua ruas."]
+      }
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Contoh 2",
+      "soal": "x - 4 <= -1",
+      "pengantar": "Sekarang ada bilangan negatif. Perhatikan tandanya."
+    },
+    {
+      "jenis": "latihan",
+      "judul": "Latihan",
+      "level": 1,
+      "hanya": "tambahKurang"
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Cek Cepat",
+      "soal": [
+        { "tipe": "jawab", "soal": "x - 3 > 4" },
+        { "tipe": "jawab", "soal": "x + 6 <= 2" },
+        { "tipe": "jawab", "soal": "9 + x >= 5" }
+      ]
+    }
+  ]
+}

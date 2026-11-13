@@ -1,0 +1,74 @@
+{
+  "id": "M2",
+  "judul": "Garis Bilangan",
+  "tujuan": "Menyajikan himpunan penyelesaian pada garis bilangan dengan bulatan dan arsiran yang tepat.",
+  "bagian": [
+    {
+      "jenis": "materi",
+      "judul": "Menggambar penyelesaian",
+      "segmen": [
+        {
+          "judul": "Mengapa garis bilangan?",
+          "teks": [
+            "Penyelesaian pertidaksamaan biasanya **banyak sekali**. Misalnya $x > 2$: 3, 4, 5, 2½, dan seterusnya.",
+            "Karena itu kita menggambarnya pada garis bilangan."
+          ],
+          "visual": { "jenis": "garis", "hasil": "x > 2" }
+        },
+        {
+          "judul": "Bulatan terbuka ○",
+          "teks": ["Untuk tanda **<** dan **>**, batasnya **tidak termasuk**. Gambarnya bulatan terbuka."],
+          "visual": { "jenis": "garis", "hasil": "x > 2" }
+        },
+        {
+          "judul": "Bulatan tertutup ●",
+          "teks": ["Untuk tanda **≤** dan **≥**, batasnya **termasuk**. Gambarnya bulatan tertutup."],
+          "visual": { "jenis": "garis", "hasil": "x >= 2" }
+        },
+        {
+          "judul": "Arah arsiran",
+          "teks": [
+            "$x > a$ atau $x >= a$ → arsir ke **kanan** (bilangan yang lebih besar).",
+            "$x < a$ atau $x <= a$ → arsir ke **kiri** (bilangan yang lebih kecil)."
+          ],
+          "visual": { "jenis": "garis", "hasil": "x < -1" }
+        },
+        {
+          "judul": "Jika semesta bilangan bulat",
+          "teks": [
+            "Jika x harus bilangan bulat, penyelesaian $x > 2$ ditulis {3, 4, 5, …}.",
+            "Angka 2 tidak ditulis karena tidak termasuk."
+          ],
+          "aktivitas": {
+            "tipe": "pilihan",
+            "pertanyaan": "Jika x bilangan bulat, penyelesaian $x >= -1$ adalah …",
+            "opsi": ["{0, 1, 2, …}", "{−1, 0, 1, …}", "{…, −3, −2, −1}"],
+            "benar": 1,
+            "umpan": ["Tanda ≥ berarti −1 juga termasuk.", null, "Arahnya terbalik: ≥ berarti bilangan yang lebih besar."]
+          }
+        }
+      ]
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Latihan",
+      "soal": [
+        { "tipe": "garis", "soal": "x > 2" },
+        { "tipe": "garis", "soal": "x <= -1" },
+        { "tipe": "pilihan", "pertanyaan": "Garis bilangan ini menunjukkan …", "visual": { "jenis": "garis", "hasil": "x <= 1" }, "opsi": ["$x < 1$", "$x <= 1$", "$x > 1$", "$x >= 1$"], "benar": 1, "umpan": ["Perhatikan bulatannya: tertutup berarti 1 termasuk.", null, "Perhatikan arah arsirannya: ke kiri.", "Perhatikan arah arsirannya: ke kiri."] },
+        { "tipe": "garis", "soal": "x < 3" },
+        { "tipe": "garis", "soal": "x >= -4" },
+        { "tipe": "pilihan", "pertanyaan": "Garis bilangan ini menunjukkan …", "visual": { "jenis": "garis", "hasil": "x > -2" }, "opsi": ["$x > -2$", "$x >= -2$", "$x < -2$"], "benar": 0, "umpan": [null, "Perhatikan bulatannya: terbuka berarti −2 tidak termasuk.", "Perhatikan arah arsirannya: ke kanan."] }
+      ]
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Cek Cepat",
+      "soal": [
+        { "tipe": "garis", "soal": "x >= 0" },
+        { "tipe": "garis", "soal": "x < -2" },
+        { "tipe": "garis", "soal": "x > 5" }
+      ]
+    }
+  ]
+}

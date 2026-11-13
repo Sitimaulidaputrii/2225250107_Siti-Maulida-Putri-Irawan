@@ -40,10 +40,11 @@ const plus = (depan, b) => (b === 0 ? depan : b > 0 ? `${depan} + ${b}` : `${dep
 
 const PEMBUAT = {
   // Level 1 — satu langkah, tanpa pembalikan tanda
-  1(r) {
+  // opsi.hanya = 'tambahKurang' → hanya bentuk x ± b (untuk modul M3)
+  1(r, opsi) {
     const s = r.bulat(-10, 10);
     const op = r.pilih(TANDA);
-    if (r.bulat(0, 1) === 0) {
+    if (opsi.hanya === 'tambahKurang' || r.bulat(0, 1) === 0) {
       const b = r.bukanNol(-9, 9);
       return `${plus('x', b)} ${op} ${s + b}`;
     }
@@ -101,10 +102,10 @@ const PEMBUAT = {
  * Membuat satu soal acak.
  * @returns {{id, level, jenis:'aljabar', soal, semesta:'real', jawaban:{tanda, nilai}, langkah}}
  */
-export function buatSoal(level, rng = acakBerbenih()) {
+export function buatSoal(level, rng = acakBerbenih(), opsi = {}) {
   const pembuat = PEMBUAT[level];
   if (!pembuat) throw new RangeError(`Generator hanya tersedia untuk level 1–4 (diminta: ${level})`);
-  const soal = pembuat(alat(rng));
+  const soal = pembuat(alat(rng), opsi);
   const hasil = selesaikan(soal);
   return {
     id: `acak-${level}-${Math.floor(rng() * 1e9).toString(36)}`,

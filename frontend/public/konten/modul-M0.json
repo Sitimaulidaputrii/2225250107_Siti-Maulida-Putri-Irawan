@@ -1,0 +1,46 @@
+{
+  "id": "M0",
+  "judul": "Siap-Siap",
+  "tujuan": "Mengecek operasi bilangan bulat dan persamaan linear satu variabel sebelum belajar pertidaksamaan.",
+  "bagian": [
+    {
+      "jenis": "kuis",
+      "judul": "Cek Kesiapan",
+      "lulus": 0.75,
+      "soal": [
+        { "tipe": "isian", "pertanyaan": "Hitunglah $-3 + 7$", "jawaban": "4", "pembahasan": "Dari −3 bergerak 7 langkah ke kanan, sampai di 4." },
+        { "tipe": "isian", "pertanyaan": "Hitunglah $-5 - 4$", "jawaban": "-9", "pembahasan": "Dari −5 bergerak 4 langkah ke kiri, sampai di −9." },
+        { "tipe": "isian", "pertanyaan": "Hitunglah $8 - 11$", "jawaban": "-3", "pembahasan": "11 lebih besar dari 8, jadi hasilnya negatif: −(11 − 8) = −3." },
+        { "tipe": "isian", "pertanyaan": "Hitunglah $(-6) · 3$", "jawaban": "-18", "pembahasan": "Negatif dikali positif hasilnya negatif." },
+        { "tipe": "isian", "pertanyaan": "Hitunglah $(-12) : (-4)$", "jawaban": "3", "pembahasan": "Negatif dibagi negatif hasilnya positif." },
+        { "tipe": "isian", "pertanyaan": "Tentukan nilai x dari $x + 4 = 10$", "awalan": "x =", "jawaban": "6", "pembahasan": "Kurangi kedua ruas dengan 4: x = 10 − 4 = 6." },
+        { "tipe": "isian", "pertanyaan": "Tentukan nilai x dari $3x - 2 = 13$", "awalan": "x =", "jawaban": "5", "pembahasan": "Tambahkan 2 pada kedua ruas: 3x = 15. Bagi kedua ruas dengan 3: x = 5." },
+        { "tipe": "isian", "pertanyaan": "Tentukan nilai x dari $-2x = 8$", "awalan": "x =", "jawaban": "-4", "pembahasan": "Bagi kedua ruas dengan −2: x = 8 : (−2) = −4." }
+      ],
+      "remedial": [
+        {
+          "judul": "Tambah & kurang bilangan bulat",
+          "teks": ["Bayangkan garis bilangan. Menambah berarti bergerak ke **kanan**, mengurangi berarti bergerak ke **kiri**."],
+          "visual": { "jenis": "rumus", "baris": ["$-3 + 7 = 4$", "$-5 - 4 = -9$"] }
+        },
+        {
+          "judul": "Kali & bagi bilangan bulat",
+          "visual": {
+            "jenis": "tabel",
+            "kepala": ["Tanda bilangan", "Hasil"],
+            "baris": [
+              ["positif dan positif", "positif"],
+              ["negatif dan negatif", "positif"],
+              ["positif dan negatif", "negatif"]
+            ]
+          }
+        },
+        {
+          "judul": "Persamaan linear",
+          "teks": ["Lakukan operasi yang **sama** pada kedua ruas sampai x sendirian."],
+          "visual": { "jenis": "rumus", "baris": ["$3x - 2 = 13$", "$3x = 15$", "$x = 5$"] }
+        }
+      ]
+    }
+  ]
+}

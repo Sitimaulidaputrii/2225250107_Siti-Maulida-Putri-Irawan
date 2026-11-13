@@ -1,0 +1,84 @@
+{
+  "id": "M1",
+  "judul": "Mengenal Pertidaksamaan",
+  "tujuan": "Mengenali kalimat pertidaksamaan dan arti tanda <, >, ≤, ≥.",
+  "bagian": [
+    {
+      "jenis": "materi",
+      "judul": "Apa itu pertidaksamaan?",
+      "segmen": [
+        {
+          "judul": "Persamaan dan pertidaksamaan",
+          "teks": [
+            "Persamaan memakai tanda **=**, misalnya $x + 2 = 5$.",
+            "Pertidaksamaan memakai tanda **<, >, ≤,** atau **≥**, misalnya $x + 2 > 5$."
+          ]
+        },
+        {
+          "judul": "Cara membaca tanda",
+          "visual": {
+            "jenis": "tabel",
+            "kepala": ["Tanda", "Dibaca"],
+            "baris": [
+              ["<", "kurang dari"],
+              [">", "lebih dari"],
+              ["≤", "kurang dari atau sama dengan"],
+              ["≥", "lebih dari atau sama dengan"]
+            ]
+          }
+        },
+        {
+          "judul": "Dalam kehidupan sehari-hari",
+          "teks": ["Kata-kata ini sering muncul di soal cerita:"],
+          "visual": {
+            "jenis": "tabel",
+            "kepala": ["Kata", "Tanda"],
+            "baris": [
+              ["paling sedikit, minimal", "≥"],
+              ["paling banyak, maksimal, tidak lebih dari", "≤"],
+              ["lebih dari", ">"],
+              ["kurang dari", "<"]
+            ]
+          }
+        },
+        {
+          "judul": "Pertidaksamaan linear satu variabel",
+          "teks": [
+            "PtLSV hanya memuat **satu variabel** dengan **pangkat satu**, misalnya $2x + 3 > 9$.",
+            "Bukan PtLSV: x² > 4 (ada pangkat dua) dan x + y < 5 (ada dua variabel)."
+          ]
+        },
+        {
+          "judul": "Penyelesaian",
+          "teks": [
+            "Penyelesaian adalah nilai x yang membuat pertidaksamaan **benar**.",
+            "Cara mengecek: ganti x dengan nilainya, lalu bandingkan kedua ruas."
+          ],
+          "aktivitas": { "tipe": "memenuhi", "soal": "2x + 3 > 9", "nilai": "4" }
+        }
+      ]
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Latihan",
+      "soal": [
+        { "tipe": "pilihan", "pertanyaan": "Usia peserta **minimal** 13 tahun. Tanda yang tepat untuk usia (u) adalah …", "opsi": ["$u < 13$", "$u > 13$", "$u <= 13$", "$u >= 13$"], "benar": 3, "umpan": ["Minimal berarti 13 juga boleh, dan lebih dari 13 juga boleh.", "Minimal berarti 13 juga boleh. Tanda > tidak memuat 13.", "Itu artinya paling banyak 13."] },
+        { "tipe": "pilihan", "pertanyaan": "Muatan truk **tidak lebih dari** 2 ton. Tanda yang tepat untuk muatan (m) adalah …", "opsi": ["$m < 2$", "$m <= 2$", "$m > 2$", "$m >= 2$"], "benar": 1, "umpan": ["Tidak lebih dari berarti 2 ton masih boleh.", null, "Itu artinya lebih berat dari 2 ton.", "Itu artinya paling sedikit 2 ton."] },
+        { "tipe": "pilihan", "pertanyaan": "Manakah yang merupakan pertidaksamaan linear satu variabel?", "opsi": ["$3x - 1 = 8$", "$3x - 1 < 8$", "x² + 1 > 5", "x + y ≥ 4"], "benar": 1, "umpan": ["Ini persamaan karena memakai tanda =.", null, "Ada pangkat dua, jadi bukan linear.", "Ada dua variabel (x dan y)."] },
+        { "tipe": "memenuhi", "soal": "x + 5 > 8", "nilai": "3" },
+        { "tipe": "memenuhi", "soal": "x + 5 >= 8", "nilai": "3" },
+        { "tipe": "memenuhi", "soal": "2x - 1 < 7", "nilai": "-2" },
+        { "tipe": "memenuhi", "soal": "4 - x <= 1", "nilai": "2" }
+      ]
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Cek Cepat",
+      "soal": [
+        { "tipe": "pilihan", "pertanyaan": "$x <= 7$ dibaca …", "opsi": ["x kurang dari 7", "x kurang dari atau sama dengan 7", "x lebih dari atau sama dengan 7"], "benar": 1 },
+        { "tipe": "memenuhi", "soal": "3x + 2 > 11", "nilai": "3" },
+        { "tipe": "pilihan", "pertanyaan": "Nilai ulangan **paling sedikit** 75. Jika nilai = n, maka …", "opsi": ["$n > 75$", "$n >= 75$", "$n <= 75$"], "benar": 1 }
+      ]
+    }
+  ]
+}

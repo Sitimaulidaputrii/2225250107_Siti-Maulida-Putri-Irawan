@@ -1,16 +1,4 @@
 import { el } from '../dom.js';
-import { DAFTAR_MODUL } from '../modul.js';
-
-export function modul(id) {
-  const m = DAFTAR_MODUL.find((x) => x.id === id);
-  if (!m) return tidakDitemukan();
-  return el('div', { class: 'halaman' },
-    el('a', { href: '#/', class: 'kembali' }, '← Beranda'),
-    el('h1', {}, `${m.id} · ${m.judul}`),
-    el('p', { class: 'redup' }, m.ringkas),
-    el('div', { class: 'kartu' }, 'Materi modul ini sedang disiapkan.'),
-  );
-}
 
 export function tentang() {
   const status = el('span', {}, 'memeriksa…');
