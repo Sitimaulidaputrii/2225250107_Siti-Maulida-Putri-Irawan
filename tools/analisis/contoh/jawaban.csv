@@ -1,0 +1,6 @@
+kode_siswa,modul,soal,level,fase,benar,kode_kesalahan,pakai_petunjuk,waktu
+S01,M4,-2x > 8,3,lengkapi1,0,E1,0,2026-11-20T08:00:00Z
+S01,M4,-2x > 8,3,lengkapi1,1,,0,2026-11-20T08:01:00Z
+S01,M3,x + 5 > 12,1,mandiri,1,,0,2026-11-20T07:50:00Z
+S02,M4,-3x + 5 <= 11,3,mandiri,0,E1,1,2026-11-20T08:02:00Z
+S02,M2,x > 2,,kuis:garis,0,E5,0,2026-11-20T07:40:00Z

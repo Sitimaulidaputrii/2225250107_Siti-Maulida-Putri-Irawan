@@ -8,6 +8,11 @@ const POLA_TOKEN = /(\(-?\d+(?:\/\d+)?\)|\d+(?:[.,]\d+)*(?:\/\d+)?)?x|\d+(?:[.,]
 const RELASI = { '<=': '≤', '>=': '≥', '<': '<', '>': '>', '=': '=', '≤': '≤', '≥': '≥' };
 const BINER = new Set(['+', '−', '·', ':']);
 
+/** 14000 → "14.000" (pemisah ribuan gaya Indonesia; parser juga membacanya). */
+export function ribuan(t) {
+  return /^\d{4,}$/.test(t) ? t.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : t;
+}
+
 /** Mengganti tanda minus ASCII dengan minus matematika (−) pada teks biasa. */
 export function teksRapi(s) {
   return String(s)
@@ -38,9 +43,9 @@ export function tampilMatematika(teks, { dibalik = false, besar = false } = {}) 
     if (t === '*' || t === '×') t = '·';
     let node;
     if (t.includes('x')) {
-      node = el('span', { class: 'mat-x' }, t.replace(/-/g, '−'));
+      node = el('span', { class: 'mat-x' }, t.replace(/-/g, '−').replace(/^\d{4,}/, ribuan));
     } else if (/^\d/.test(t)) {
-      node = el('span', { class: 'mat-k' }, t);
+      node = el('span', { class: 'mat-k' }, ribuan(t));
     } else if (RELASI[t]) {
       node = el('span', { class: dibalik ? 'mat-rel mat-balik' : 'mat-rel' }, ` ${RELASI[t]} `);
     } else if (BINER.has(t)) {

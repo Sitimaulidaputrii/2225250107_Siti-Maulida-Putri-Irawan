@@ -4,7 +4,7 @@ export const DAFTAR_MODUL = [
   { id: 'M1', judul: 'Mengenal Pertidaksamaan', ringkas: 'Arti <, >, ≤, ≥', tersedia: true },
   { id: 'M2', judul: 'Garis Bilangan', ringkas: 'Bulatan & arsiran', tersedia: true },
   { id: 'M3', judul: 'Tambah & Kurang', ringkas: 'Tanda tetap', tersedia: true },
-  { id: 'M4', judul: 'Kali & Bagi', ringkas: 'Kapan tanda dibalik?', fokus: true },
-  { id: 'M5', judul: 'Bentuk Beragam', ringkas: 'Kurung, pecahan, x di dua ruas' },
-  { id: 'M6', judul: 'Soal Cerita', ringkas: 'Tandai, model, selesaikan' },
+  { id: 'M4', judul: 'Kali & Bagi', ringkas: 'Kapan tanda dibalik?', fokus: true, tersedia: true },
+  { id: 'M5', judul: 'Bentuk Beragam', ringkas: 'Kurung, pecahan, x di dua ruas', tersedia: true },
+  { id: 'M6', judul: 'Soal Cerita', ringkas: 'Tandai, model, selesaikan', tersedia: true },
 ];

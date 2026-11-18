@@ -1,0 +1,106 @@
+{
+  "id": "M5",
+  "judul": "Bentuk Beragam",
+  "tujuan": "Menyelesaikan PtLSV bentuk beragam: variabel di dua ruas, tanda kurung, dan pecahan sederhana.",
+  "bagian": [
+    {
+      "jenis": "materi",
+      "judul": "Mulai dari mana?",
+      "segmen": [
+        {
+          "judul": "Bentuknya berbeda, caranya sama",
+          "teks": [
+            "Soal bisa terlihat berbeda dari contoh, tetapi tujuannya selalu sama: membuat **x sendirian** di satu ruas.",
+            "Jawab empat pertanyaan ini berurutan."
+          ],
+          "visual": {
+            "jenis": "tabel",
+            "kepala": ["Tanya diri sendiri", "Jika ya …"],
+            "baris": [
+              ["1. Ada tanda kurung?", "Uraikan dulu"],
+              ["2. Ada pecahan?", "Kalikan kedua ruas dengan penyebut (positif)"],
+              ["3. Ada x di kedua ruas?", "Kumpulkan suku x di satu ruas"],
+              ["4. x masih dikali bilangan?", "Bagi — **negatif? balik tanda!**"]
+            ]
+          }
+        },
+        {
+          "judul": "Tanda kurung",
+          "teks": ["Kalikan bilangan di depan kurung ke **setiap** suku di dalamnya."],
+          "visual": { "jenis": "rumus", "baris": ["$2(x - 3) = 2x - 6$", "$-3(2 - x) = -6 + 3x$"] },
+          "aktivitas": {
+            "tipe": "pilihan",
+            "pertanyaan": "Bentuk uraian dari $3(x + 4)$ adalah …",
+            "opsi": ["$3x + 4$", "$3x + 12$", "$x + 12$"],
+            "benar": 1,
+            "umpan": ["Angka 3 dikalikan ke semua suku, termasuk 4.", null, "Angka 3 juga dikalikan ke x."]
+          }
+        },
+        {
+          "judul": "Pecahan",
+          "teks": [
+            "Kalikan kedua ruas dengan penyebutnya agar pecahan hilang.",
+            "Penyebutnya **positif**, jadi tanda tetap."
+          ],
+          "visual": { "jenis": "rumus", "baris": ["$x/2 >= 3$", "$x >= 6$"] }
+        },
+        {
+          "judul": "x di kedua ruas",
+          "teks": [
+            "Kumpulkan suku x di satu ruas dan bilangan di ruas lain.",
+            "Tips: kumpulkan x di ruas yang membuat koefisiennya positif agar tidak perlu membalik tanda."
+          ],
+          "visual": { "jenis": "rumus", "baris": ["$5x - 2 >= 3x + 6$", "$2x >= 8$"] }
+        }
+      ]
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Contoh: x di kedua ruas",
+      "soal": "5x - 2 >= 3x + 6"
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Contoh: tanda kurung",
+      "soal": "2(x - 3) < 5x + 9",
+      "pengantar": "Ada kurung **dan** x di kedua ruas. Perhatikan langkah terakhir.",
+      "prompt": {
+        "pertanyaan": "Mengapa pada langkah terakhir tandanya dibalik?",
+        "opsi": ["Karena ada tanda kurung", "Karena kedua ruas dibagi −3", "Karena 15 bilangan positif"],
+        "benar": 1,
+        "umpan": ["Menguraikan kurung tidak mengubah tanda.", null, "Lihat pembaginya, bukan hasilnya."]
+      }
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Contoh: pecahan",
+      "soal": "x/2 + 1 >= 4",
+      "langkah": [
+        { "ekspresi": "x/2 + 1 >= 4", "penjelasan": "Soal awal." },
+        { "ekspresi": "x/2 >= 3", "penjelasan": "Kurangi kedua ruas dengan 1. Tanda tetap." },
+        { "ekspresi": "x >= 6", "penjelasan": "Kalikan kedua ruas dengan 2 (positif). Tanda tetap." }
+      ]
+    },
+    {
+      "jenis": "latihan",
+      "judul": "Latihan",
+      "level": 4
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Cek Cepat",
+      "soal": [
+        {
+          "tipe": "pilihan",
+          "pertanyaan": "Langkah pertama yang tepat untuk $2(x + 4) >= 3x$ adalah …",
+          "opsi": ["Uraikan tanda kurung", "Bagi kedua ruas dengan 3", "Balik tandanya"],
+          "benar": 0,
+          "umpan": [null, "Tanda kurung diuraikan dulu.", "Tanda hanya dibalik saat kali/bagi bilangan negatif."]
+        },
+        { "tipe": "jawab", "soal": "3(2 - x) > x - 10" },
+        { "tipe": "jawab", "soal": "(x + 1)/3 <= 2" },
+        { "tipe": "jawab", "soal": "4x + 7 > 6x - 1" }
+      ]
+    }
+  ]
+}

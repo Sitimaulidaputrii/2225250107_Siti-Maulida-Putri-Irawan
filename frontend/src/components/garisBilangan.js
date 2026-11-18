@@ -142,6 +142,68 @@ export function garisBilangan({ min, max, keadaan = null, interaktif = false, on
   return { el: wadah, ambil: () => ({ ...k }) };
 }
 
+/**
+ * Garis bilangan "sebelum → sesudah" untuk dua bilangan A dan B (desain D03).
+ * Titik bergerak dari posisi lama ke posisi baru; saat dikali/dibagi bilangan negatif,
+ * terlihat bahwa urutan A dan B BERTUKAR (pencerminan) sehingga tanda harus dibalik.
+ */
+export function garisPerbandingan({ a, b, a2, b2 }) {
+  const nilai = [a, b, a2, b2].map((x) => Pecahan.dari(x).keNumber());
+  const min = Math.floor(Math.min(...nilai, 0)) - 1;
+  const max = Math.ceil(Math.max(...nilai, 0)) + 1;
+  const lebarSatuan = (L - 2 * TEPI) / (max - min);
+  const posX = (v) => TEPI + (Pecahan.dari(v).keNumber() - min) * lebarSatuan;
+  const labelSetiap = Math.ceil((max - min) / 14);
+  const TINGGI = 96;
+  const YG = 52;
+
+  const gambar = svg('svg', {
+    viewBox: `0 0 ${L} ${TINGGI}`,
+    class: 'garis-svg',
+    role: 'img',
+    'aria-label': `Sebelum: A = ${a}, B = ${b}. Sesudah: A = ${a2}, B = ${b2}.`,
+  });
+  gambar.append(
+    svg('line', { x1: 4, y1: YG, x2: L - 4, y2: YG, class: 'garis-sumbu' }),
+    svg('path', { d: `M4 ${YG} l8 -5 v10 z`, class: 'garis-panah-sumbu' }),
+    svg('path', { d: `M${L - 4} ${YG} l-8 -5 v10 z`, class: 'garis-panah-sumbu' }),
+  );
+  for (let v = min; v <= max; v++) {
+    const x = posX(v);
+    gambar.append(svg('line', { x1: x, y1: YG - 5, x2: x, y2: YG + 5, class: 'garis-tik' }));
+    if ((v - min) % labelSetiap === 0 || v === 0) {
+      const t = svg('text', { x, y: YG + 22, class: v === 0 ? 'garis-label nol' : 'garis-label' });
+      t.textContent = minus(v);
+      gambar.append(t);
+    }
+  }
+
+  // Titik bayangan (posisi lama) + titik yang bergerak
+  const titik = (nama, dari, ke, kelas) => {
+    const x0 = posX(dari);
+    const x1 = posX(ke);
+    gambar.append(svg('circle', { cx: x0, cy: YG, r: 5, class: 'banding-bayang' }));
+    const g = svg('g', { class: `banding-titik ${kelas}` });
+    const label = svg('text', { x: 0, y: -12, class: 'banding-label' });
+    label.textContent = nama;
+    g.append(svg('circle', { cx: 0, cy: 0, r: 7 }), label);
+    g.style.transform = `translate(${x0}px, ${YG}px)`;
+    gambar.append(g);
+    return () => (g.style.transform = `translate(${x1}px, ${YG}px)`);
+  };
+  const gerakA = titik('A', a, a2, 'banding-a');
+  const gerakB = titik('B', b, b2, 'banding-b');
+
+  const wadah = el('div', { class: 'garis garis-banding' }, gambar,
+    el('p', { class: 'petunjuk-kecil' }, '○ abu-abu = posisi sebelum, titik berwarna = posisi sesudah'));
+  // Mulai animasi setelah elemen tampil
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    gerakA();
+    gerakB();
+  }));
+  return wadah;
+}
+
 /** Garis bilangan statis untuk teks hasil/soal, mis. "x >= -2". */
 export function garisUntuk(teks) {
   const keadaan = keadaanDariHasil(teks);

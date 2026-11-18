@@ -17,8 +17,9 @@
   color-scheme: light;
 }
 
+/* Tema gelap: mengikuti sistem, kecuali siswa memilih "terang" di Pengaturan */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --latar: #111827;
     --permukaan: #1f2937;
     --teks: #f3f4f6;
@@ -33,6 +34,22 @@
     --cek: #facc15;
     color-scheme: dark;
   }
+}
+/* Tema gelap yang dipilih siswa di Pengaturan */
+:root[data-theme="dark"] {
+  --latar: #111827;
+  --permukaan: #1f2937;
+  --teks: #f3f4f6;
+  --redup: #9ca3af;
+  --garis: #374151;
+  --primer: #3b82f6;
+  --primer-teks: #0b1220;
+  --suku-x: #60a5fa;
+  --konstanta: #9ca3af;
+  --balik: #fb923c;
+  --benar: #4ade80;
+  --cek: #facc15;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }

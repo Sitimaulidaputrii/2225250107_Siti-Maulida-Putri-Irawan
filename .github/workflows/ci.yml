@@ -19,6 +19,15 @@ jobs:
         run: pytest -q
       - name: Validasi bank soal
         run: python tools/validasi_soal.py "frontend/public/konten/soal-*.json"
+      - name: Uji skrip analisis data
+        run: pytest -q tools/analisis
+
+  docker:
+    # Memastikan Dockerfile (frontend + backend dalam satu image) dapat di-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t tandatepat .
 
   periksa-silang-js-python:
     # Soal acak dari mesin JavaScript harus disetujui SymPy (kunci & setiap langkah).

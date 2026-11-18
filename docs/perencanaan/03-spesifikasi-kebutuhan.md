@@ -126,7 +126,7 @@
 | NF5 | Responsif | Lebar layar 320 px – 1440 px |
 | NF6 | Aksesibilitas | Kontras teks ≥ 4.5:1, target sentuh ≥ 44×44 px, mendukung pembesaran huruf, opsi kurangi animasi |
 | NF7 | Privasi | Tidak menyimpan nama lengkap, email, foto, atau lokasi siswa; data dalam bentuk pseudonim |
-| NF8 | Keamanan | HTTPS wajib; PIN & kata sandi di-*hash* (bcrypt/argon2); token JWT berumur pendek |
+| NF8 | Keamanan | HTTPS wajib; PIN & kata sandi di-*hash* (scrypt); percobaan masuk dibatasi 5×/10 menit; token JWT berumur pendek |
 | NF9 | Keterpeliharaan | Konten (materi & soal) di file JSON terpisah dari kode; tervalidasi otomatis oleh skrip Python |
 | NF10 | Bahasa | Bahasa Indonesia baku, kalimat pendek, sesuai tingkat SMP |
 | NF11 | Instalasi | Dapat diinstal langsung dari browser (PWA); opsional APK *sideload* |

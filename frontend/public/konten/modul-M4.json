@@ -1,0 +1,135 @@
+{
+  "id": "M4",
+  "judul": "Kali & Bagi Kedua Ruas",
+  "tujuan": "Menjelaskan dan menerapkan aturan perkalian/pembagian kedua ruas dengan bilangan positif dan negatif.",
+  "leppink": true,
+  "bagian": [
+    {
+      "jenis": "materi",
+      "judul": "Coba dulu",
+      "segmen": [
+        {
+          "judul": "Eksperimen 1",
+          "teks": ["Kita mulai dari pernyataan benar, lalu **kalikan** kedua ruas dengan bilangan positif."],
+          "aktivitas": { "tipe": "bandingkan", "kiri": "2", "kanan": "6", "operasi": { "jenis": "kali", "nilai": "3" } }
+        },
+        {
+          "judul": "Eksperimen 2",
+          "teks": ["Sekarang kalikan kedua ruas dengan bilangan **negatif**. Perhatikan garis bilangannya."],
+          "aktivitas": { "tipe": "bandingkan", "kiri": "2", "kanan": "6", "operasi": { "jenis": "kali", "nilai": "-1" } }
+        },
+        {
+          "judul": "Eksperimen 3",
+          "teks": ["Bagaimana jika kedua ruas **dibagi** bilangan negatif?"],
+          "aktivitas": { "tipe": "bandingkan", "kiri": "4", "kanan": "8", "operasi": { "jenis": "bagi", "nilai": "-2" } }
+        },
+        {
+          "judul": "Eksperimen 4",
+          "teks": ["Hati-hati! Sekarang bilangannya negatif, tetapi pembaginya **positif**."],
+          "aktivitas": { "tipe": "bandingkan", "kiri": "-3", "kanan": "6", "operasi": { "jenis": "bagi", "nilai": "3" } }
+        },
+        {
+          "judul": "Mengapa tandanya dibalik?",
+          "teks": [
+            "Mengalikan dengan bilangan negatif **mencerminkan** bilangan terhadap 0.",
+            "Yang tadinya di kiri pindah ke kanan, jadi urutannya terbalik.",
+            "Coba sendiri di **Lab Garis Bilangan** dari Beranda."
+          ],
+          "visual": { "jenis": "rumus", "baris": ["$2 < 6$", "$-2 > -6$"] }
+        },
+        {
+          "judul": "Aturan",
+          "visual": {
+            "jenis": "tabel",
+            "kepala": ["Kedua ruas …", "Tanda"],
+            "baris": [
+              ["ditambah / dikurangi bilangan apa pun", "tetap"],
+              ["dikali / dibagi bilangan **positif**", "tetap"],
+              ["dikali / dibagi bilangan **negatif**", "**dibalik** ⇄"]
+            ]
+          },
+          "teks": ["Dibalik artinya $<$ menjadi $>$, dan $<=$ menjadi $>=$ (begitu juga sebaliknya)."]
+        }
+      ]
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Contoh",
+      "soal": "-3x + 5 <= 11",
+      "pengantar": "Perhatikan langkah yang berwarna **oranye**.",
+      "prompt": {
+        "pertanyaan": "Mengapa tanda $<=$ berubah menjadi $>=$?",
+        "opsi": ["Karena dikurangi 5", "Karena dibagi bilangan negatif (−3)", "Karena hasilnya negatif (−2)"],
+        "benar": 1,
+        "umpan": ["Mengurangi kedua ruas tidak mengubah tanda.", null, "Hasil negatif tidak membuat tanda dibalik. Lihat pembaginya."]
+      }
+    },
+    {
+      "jenis": "pasangan",
+      "judul": "Contoh Berpasangan",
+      "pengantar": "Dua soal ini hampir sama. Buka langkahnya bersamaan dan cari **perbedaannya**.",
+      "kiri": { "label": "A — koefisien positif", "soal": "3x + 5 <= 11" },
+      "kanan": { "label": "B — koefisien negatif", "soal": "-3x + 5 <= 11" },
+      "prompt": {
+        "pertanyaan": "Apa perbedaan langkah terakhir A dan B?",
+        "opsi": [
+          "Di B tanda dibalik karena dibagi −3, di A tetap karena dibagi 3",
+          "Di B tanda dibalik karena 11 − 5 = 6",
+          "Tidak ada bedanya"
+        ],
+        "benar": 0,
+        "umpan": [null, "11 − 5 = 6 terjadi di A dan B. Bandingkan pembaginya.", "Lihat lagi tanda pada hasil akhir A dan B."]
+      }
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Contoh: x bernilai negatif",
+      "soal": "7 - x < 10",
+      "pengantar": "Jika tersisa $-x$, kalikan kedua ruas dengan $-1$."
+    },
+    {
+      "jenis": "contoh",
+      "judul": "Cara lain: buat koefisien x positif",
+      "soal": "-3x <= 6",
+      "pengantar": "Sering lupa membalik tanda? Pindahkan suku x ke ruas yang membuat koefisiennya **positif**.",
+      "langkah": [
+        { "ekspresi": "-3x <= 6", "penjelasan": "Soal awal." },
+        { "ekspresi": "0 <= 6 + 3x", "penjelasan": "Tambahkan 3x pada kedua ruas. Tanda tetap." },
+        { "ekspresi": "-6 <= 3x", "penjelasan": "Kurangi kedua ruas dengan 6. Tanda tetap." },
+        { "ekspresi": "-2 <= x", "penjelasan": "Bagi kedua ruas dengan 3 (positif). Tanda tetap." },
+        { "ekspresi": "x >= -2", "penjelasan": "Dibaca dari kanan: −2 ≤ x sama artinya dengan x ≥ −2. Hasilnya sama dengan cara biasa!" }
+      ]
+    },
+    {
+      "jenis": "latihan",
+      "judul": "Latihan 1: pembagi positif",
+      "level": 2
+    },
+    {
+      "jenis": "latihan",
+      "judul": "Latihan 2: pembagi negatif",
+      "level": 3
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Cek Cepat",
+      "soal": [
+        {
+          "tipe": "jawab",
+          "soal": "-2x > 8",
+          "salah_umum": [{ "kode": "E1", "jawaban": { "tanda": ">", "nilai": "-4" } }]
+        },
+        { "tipe": "jawab", "soal": "-4x - 2 >= 10" },
+        { "tipe": "jawab", "soal": "12 - 3x >= 0" },
+        {
+          "tipe": "pilihan",
+          "pertanyaan": "Pada $-5x < 20$, kedua ruas dibagi $-5$. Hasilnya …",
+          "opsi": ["$x < -4$", "$x > -4$", "$x > 4$"],
+          "benar": 1,
+          "umpan": ["Kamu membagi dengan bilangan negatif. Apa yang terjadi pada tanda?", null, "Periksa lagi: 20 : (−5) = …"]
+        },
+        { "tipe": "garis", "soal": "-5x + 1 < -14" }
+      ]
+    }
+  ]
+}

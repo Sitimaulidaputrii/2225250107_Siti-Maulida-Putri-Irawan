@@ -1,0 +1,165 @@
+{
+  "id": "M6",
+  "judul": "Soal Cerita",
+  "tujuan": "Memodelkan dan menyelesaikan masalah kontekstual yang berkaitan dengan PtLSV.",
+  "leppink": true,
+  "bagian": [
+    {
+      "jenis": "materi",
+      "judul": "Lima tahap soal cerita",
+      "segmen": [
+        {
+          "judul": "Jangan langsung menghitung",
+          "teks": ["Soal cerita dikerjakan dalam **lima tahap** yang sama setiap kali."],
+          "visual": {
+            "jenis": "tabel",
+            "kepala": ["Tahap", "Yang dilakukan"],
+            "baris": [
+              ["1. Tandai", "Tandai angka dan kata kunci"],
+              ["2. Misalkan", "Tentukan apa yang menjadi x"],
+              ["3. Model", "Susun pertidaksamaannya"],
+              ["4. Selesaikan", "Selesaikan seperti biasa"],
+              ["5. Tafsirkan", "Jawab pertanyaan sesuai cerita"]
+            ]
+          }
+        },
+        {
+          "judul": "Kamus kata kunci",
+          "visual": {
+            "jenis": "tabel",
+            "kepala": ["Kata di soal", "Tanda"],
+            "baris": [
+              ["paling sedikit, minimal, sekurang-kurangnya", "≥"],
+              ["paling banyak, maksimal, tidak lebih dari", "≤"],
+              ["lebih dari", ">"],
+              ["kurang dari", "<"]
+            ]
+          }
+        },
+        {
+          "judul": "Tafsirkan jawabannya",
+          "teks": [
+            "Hasil $x <= 9,5$ belum menjawab soal jika x adalah banyak buku.",
+            "Banyak buku harus bilangan cacah, jadi jawabannya **paling banyak 9 buku**."
+          ],
+          "aktivitas": {
+            "tipe": "pilihan",
+            "pertanyaan": "x = banyak orang, dan hasilnya $x < 12$. Paling banyak berapa orang?",
+            "opsi": ["12 orang", "11 orang", "11,9 orang"],
+            "benar": 1,
+            "umpan": ["Tanda < berarti 12 tidak termasuk.", null, "Banyak orang harus bilangan cacah."]
+          }
+        }
+      ]
+    },
+    {
+      "jenis": "contohCerita",
+      "judul": "Contoh",
+      "pengantar": "Ikuti kelima tahapnya. Ketuk **Langkah berikutnya**.",
+      "soal": {
+        "tipe": "cerita",
+        "teks": "Budi membawa uang Rp50.000. Ia membeli sebuah kotak pensil seharga Rp14.000 dan beberapa buku tulis seharga Rp4.000 per buah. Berapa paling banyak buku tulis yang dapat dibeli Budi?",
+        "token_penting": ["Rp50.000", "Rp14.000", "Rp4.000", "paling banyak"],
+        "misalkan": { "opsi": ["x = banyak buku tulis", "x = harga satu buku tulis", "x = sisa uang Budi"], "benar": 0 },
+        "variabel": "x = banyak buku tulis",
+        "model": "14000 + 4000x <= 50000",
+        "opsi_model": ["14000 + 4000x <= 50000", "14000 + 4000x >= 50000", "4000 + 14000x <= 50000"],
+        "alasan_model": "Total belanja = $14000 + 4000x$. Total itu **tidak boleh melebihi** uang Budi, jadi tandanya $<=$.",
+        "semesta": "cacah",
+        "tanya_tafsir": "Jadi, paling banyak berapa buku tulis yang dapat dibeli Budi?",
+        "satuan": "buku",
+        "alasan_tafsir": "Hasilnya $x <= 9$ dan banyak buku harus bilangan cacah, jadi paling banyak **9 buku**.",
+        "tafsiran": "Budi dapat membeli paling banyak 9 buku tulis."
+      }
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Latihan Soal Cerita",
+      "soal": [
+        {
+          "tipe": "cerita",
+          "teks": "Sebuah lift dapat mengangkut beban paling banyak 500 kg. Operator lift beratnya 60 kg. Ia akan mengangkut beberapa kotak yang masing-masing beratnya 40 kg. Berapa kotak paling banyak yang dapat diangkut sekali jalan?",
+          "token_penting": ["paling banyak", "500", "60", "40"],
+          "misalkan": { "opsi": ["x = banyak kotak", "x = berat satu kotak", "x = berat operator"], "benar": 0 },
+          "variabel": "x = banyak kotak",
+          "model": "60 + 40x <= 500",
+          "opsi_model": ["40 + 60x <= 500", "60 + 40x <= 500", "60 + 40x >= 500"],
+          "semesta": "cacah",
+          "tanya_tafsir": "Jadi, paling banyak berapa kotak yang dapat diangkut sekali jalan?",
+          "satuan": "kotak",
+          "tafsiran": "Paling banyak 11 kotak sekali jalan."
+        },
+        {
+          "tipe": "cerita",
+          "teks": "Nilai dua ulangan Sinta adalah 70 dan 72. Sinta ingin rata-rata tiga ulangannya paling sedikit 75. Berapa nilai minimal yang harus diperoleh Sinta pada ulangan ketiga?",
+          "token_penting": ["70", "72", "paling sedikit", "75"],
+          "misalkan": { "opsi": ["x = rata-rata nilai", "x = nilai ulangan ketiga", "x = jumlah tiga nilai"], "benar": 1 },
+          "variabel": "x = nilai ulangan ketiga",
+          "model": "(70 + 72 + x)/3 >= 75",
+          "opsi_model": ["(70 + 72 + x)/3 >= 75", "(70 + 72 + x)/3 <= 75", "70 + 72 + x >= 75"],
+          "semesta": "cacah",
+          "tanya_tafsir": "Jadi, berapa nilai minimal ulangan ketiga?",
+          "tafsiran": "Sinta harus mendapat nilai paling sedikit 83."
+        },
+        {
+          "tipe": "cerita",
+          "teks": "Suhu sebuah ruang pendingin mula-mula 6°C. Setiap jam suhunya turun 3°C. Setelah berapa jam suhunya kurang dari −9°C?",
+          "token_penting": ["6°C", "turun", "3°C", "kurang dari", "−9°C"],
+          "misalkan": { "opsi": ["x = suhu akhir", "x = penurunan suhu per jam", "x = lama waktu (jam)"], "benar": 2 },
+          "variabel": "x = lama waktu (jam)",
+          "model": "6 - 3x < -9",
+          "opsi_model": ["6 + 3x < -9", "6 - 3x < -9", "6 - 3x > -9"],
+          "semesta": "real",
+          "tanya_tafsir": "Suhunya kurang dari −9°C setelah **lebih dari** berapa jam?",
+          "satuan": "jam",
+          "tafsiran": "Suhu kurang dari −9°C setelah lebih dari 5 jam."
+        },
+        {
+          "tipe": "cerita",
+          "teks": "Saldo uang elektronik Rani Rp50.000. Setiap hari ia memakai Rp6.000 untuk ongkos. Rani ingin saldonya tetap lebih dari Rp14.000. Paling lama berapa hari Rani dapat memakai saldo itu?",
+          "token_penting": ["Rp50.000", "Rp6.000", "lebih dari", "Rp14.000"],
+          "misalkan": { "opsi": ["x = banyak hari", "x = sisa saldo", "x = ongkos per hari"], "benar": 0 },
+          "variabel": "x = banyak hari",
+          "model": "50000 - 6000x > 14000",
+          "opsi_model": ["50000 - 6000x >= 14000", "50000 + 6000x > 14000", "50000 - 6000x > 14000"],
+          "semesta": "cacah",
+          "tanya_tafsir": "Jadi, paling lama berapa hari?",
+          "satuan": "hari",
+          "tafsiran": "Paling lama 5 hari. Pada hari ke-6 saldonya tepat Rp14.000, padahal harus lebih dari Rp14.000."
+        }
+      ]
+    },
+    {
+      "jenis": "kuis",
+      "judul": "Cek Cepat",
+      "soal": [
+        {
+          "tipe": "cerita",
+          "teks": "Taksi daring memasang biaya awal Rp8.000 dan Rp4.000 per km. Uang Dina Rp40.000. Paling jauh berapa km Dina dapat naik taksi itu?",
+          "token_penting": ["Rp8.000", "Rp4.000", "Rp40.000", "Paling jauh"],
+          "misalkan": { "opsi": ["x = jarak (km)", "x = biaya per km", "x = sisa uang Dina"], "benar": 0 },
+          "variabel": "x = jarak perjalanan (km)",
+          "model": "8000 + 4000x <= 40000",
+          "opsi_model": ["8000 + 4000x <= 40000", "8000x + 4000 <= 40000", "8000 + 4000x >= 40000"],
+          "semesta": "real",
+          "tanya_tafsir": "Jadi, paling jauh berapa km?",
+          "satuan": "km",
+          "tafsiran": "Dina dapat naik paling jauh 8 km."
+        },
+        {
+          "tipe": "cerita",
+          "teks": "Panjang sebuah persegi panjang 5 cm lebih dari lebarnya. Kelilingnya tidak lebih dari 50 cm. Berapa lebar paling besar persegi panjang itu?",
+          "token_penting": ["5", "tidak lebih dari", "50"],
+          "misalkan": { "opsi": ["x = panjang", "x = lebar", "x = keliling"], "benar": 1 },
+          "variabel": "x = lebar (cm), panjang = x + 5",
+          "model": "2(x + (x + 5)) <= 50",
+          "opsi_model": ["x + (x + 5) <= 50", "2(x + 5) <= 50", "2(x + (x + 5)) <= 50"],
+          "semesta": "real",
+          "tanya_tafsir": "Jadi, berapa lebar paling besar?",
+          "satuan": "cm",
+          "tafsiran": "Lebar paling besar 10 cm."
+        }
+      ]
+    }
+  ]
+}

@@ -9,13 +9,16 @@ AKAR_BACKEND = Path(__file__).resolve().parent.parent
 load_dotenv(AKAR_BACKEND / ".env")
 
 
+KUNCI_BAWAAN = "kunci-pengembangan-saja-ganti-SECRET_KEY-di-produksi"
+
+
 def _daftar(nilai: str) -> list[str]:
     return [s.strip() for s in nilai.split(",") if s.strip()]
 
 
 @dataclass(frozen=True)
 class Pengaturan:
-    secret_key: str = os.getenv("SECRET_KEY", "ganti-di-produksi")
+    secret_key: str = os.getenv("SECRET_KEY", KUNCI_BAWAAN)
     database_url: str = os.getenv("DATABASE_URL", f"sqlite:///{AKAR_BACKEND / 'tandatepat.db'}")
     cors_origins: list[str] = field(
         default_factory=lambda: _daftar(os.getenv("CORS_ORIGINS", "http://localhost:5173"))

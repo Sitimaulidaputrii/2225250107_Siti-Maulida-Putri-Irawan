@@ -16,7 +16,7 @@ import { Pecahan } from '../engine/pecahan.js';
 import { parsePertidaksamaan } from '../engine/parser.js';
 import { langkahPenyelesaian, memenuhi } from '../engine/penyelesai.js';
 import { tampilMatematika, teksRapi } from '../ui/matematika.js';
-import { garisBilangan, garisUntuk, keadaanDariHasil, rentangUntuk } from './garisBilangan.js';
+import { garisBilangan, garisPerbandingan, garisUntuk, keadaanDariHasil, rentangUntuk } from './garisBilangan.js';
 import { barisLangkah } from './langkahDemiLangkah.js';
 import { papanTanda } from './papanTanda.js';
 
@@ -217,9 +217,11 @@ function butirBandingkan(item, onSelesai) {
   const bentuk = (x) => `${x} ${LAMBANG[jenis]} ${nTeks}`;
 
   const garisHasil = () =>
-    el('p', { class: 'pembahasan' },
-      `${teksRapi(String(a2))} berada di sebelah ${tandaAkhir === '<' ? 'kiri' : 'kanan'} ${teksRapi(String(b2))} pada garis bilangan, `,
-      tetap ? 'jadi tandanya tetap.' : el('strong', { class: 'teks-balik' }, 'jadi tandanya berubah (dibalik)!'));
+    el('div', {},
+      garisPerbandingan({ a, b, a2, b2 }),
+      el('p', { class: 'pembahasan' },
+        `A = ${teksRapi(String(a2))} sekarang berada di sebelah ${tandaAkhir === '<' ? 'kiri' : 'kanan'} B = ${teksRapi(String(b2))}, `,
+        tetap ? 'jadi tandanya tetap.' : el('strong', { class: 'teks-balik' }, 'jadi tandanya berubah (dibalik)!')));
 
   const { el: daftar, tombol } = pilihanTombol(['<', '>'], {
     konten: (o) => el('span', { class: 'mat mat-besar' }, o),
@@ -235,7 +237,7 @@ function butirBandingkan(item, onSelesai) {
   });
 
   return el('div', { class: 'butir' },
-    el('p', { class: 'butir-tanya' }, 'Diketahui ', tampilMatematika(`${a} ${tandaAwal} ${b}`), '. ',
+    el('p', { class: 'butir-tanya' }, `Diketahui A = ${teksRapi(String(a))} dan B = ${teksRapi(String(b))}, jadi `, tampilMatematika(`${a} ${tandaAwal} ${b}`), '. ',
       `Jika kedua ruas ${teksRapi(NAMA_OPERASI[jenis](String(n)))}, tanda apa yang tepat?`),
     el('div', { class: 'soal-besar' }, tampilMatematika(`${bentuk(a)}`), el('span', { class: 'mat mat-besar kotak-tanya' }, ' ? '), tampilMatematika(`${bentuk(b)}`)),
     daftar, kotak);
@@ -249,6 +251,11 @@ const PEMBUAT = {
   garis: butirGaris,
   bandingkan: butirBandingkan,
 };
+
+/** Mendaftarkan jenis butir dari modul lain (mis. soal cerita) tanpa ketergantungan melingkar. */
+export function daftarkanButir(tipe, pembuat) {
+  PEMBUAT[tipe] = pembuat;
+}
 
 export function renderButir(item, onSelesai = () => {}) {
   const buat = PEMBUAT[item.tipe];

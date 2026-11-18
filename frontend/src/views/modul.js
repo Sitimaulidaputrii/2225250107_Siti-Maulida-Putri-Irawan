@@ -4,16 +4,20 @@
  *   #/modul/M3/2   → membuka bagian ke-2
  * Jenis bagian: materi | contoh | latihan | kuis
  */
+import { contohBerpasangan } from '../components/contohBerpasangan.js';
+import { soalCerita } from '../components/soalCerita.js';
 import { latihan } from '../components/latihan.js';
+import { ambilPengaturanKelas } from '../pengaturan.js';
 import { langkahDemiLangkah } from '../components/langkahDemiLangkah.js';
 import { renderButir, teksCampur, visual } from '../components/soal.js';
 import { el } from '../dom.js';
 import { statusAwal } from '../engine/adaptif.js';
 import { langkahPenyelesaian } from '../engine/penyelesai.js';
 import { DAFTAR_MODUL } from '../modul.js';
-import { ambilProgres, simpanProgres } from '../penyimpanan.js';
+import { ambilProgres, catatPercobaan, simpanProgres } from '../penyimpanan.js';
+import { kuesionerLeppink, skalaPaas } from '../components/skalaBeban.js';
 
-const IKON_BAGIAN = { materi: '📘', contoh: '🧩', latihan: '✏️', kuis: '✅' };
+const IKON_BAGIAN = { materi: '📘', contoh: '🧩', pasangan: '⚖️', contohCerita: '📖', latihan: '✏️', kuis: '✅' };
 
 const cacheKonten = new Map();
 export async function muatKonten(id) {
@@ -91,16 +95,41 @@ function halamanBagian(konten, indeks, progres) {
   const total = konten.bagian.length;
   const akhir = el('div', { class: 'bagian-akhir', hidden: true });
 
+  let sudahSkala = false;
   const selesai = async () => {
     await tandaiSelesai(konten.id, indeks, total);
     const berikut = indeks + 1 < total ? `#/modul/${konten.id}/${indeks + 1}` : `#/modul/${konten.id}`;
+    const tautanLanjut = () => akhir.replaceChildren(el('a', { href: berikut, class: 'tombol' },
+      indeks + 1 < total ? `Lanjut: ${konten.bagian[indeks + 1].judul} →` : 'Selesai — kembali ke ringkasan modul'));
     akhir.hidden = false;
-    akhir.replaceChildren(el('a', { href: berikut, class: 'tombol' }, indeks + 1 < total ? `Lanjut: ${konten.bagian[indeks + 1].judul} →` : 'Selesai — kembali ke ringkasan modul'));
+
+    // Instrumen beban kognitif (hanya bila diaktifkan guru, sekali per kunjungan)
+    const antrean = [];
+    const { skalaBeban } = await ambilPengaturanKelas();
+    if (skalaBeban && !sudahSkala) {
+      sudahSkala = true;
+      if (bagian.jenis === 'latihan' || bagian.jenis === 'kuis') {
+        antrean.push((lanjut) => skalaPaas({ aktivitas: `${konten.id}/${indeks}`, onSelesai: lanjut }));
+      }
+      if (konten.leppink && indeks === total - 1) {
+        antrean.push((lanjut) => kuesionerLeppink({ aktivitas: konten.id, onSelesai: lanjut }));
+      }
+    }
+    const jalan = () => {
+      const buat = antrean.shift();
+      if (buat) akhir.replaceChildren(buat(jalan));
+      else tautanLanjut();
+    };
+    jalan();
   };
 
   const pemutar = {
     materi: () => pemutarMateri(bagian, selesai),
     contoh: () => pemutarContoh(bagian, selesai),
+    pasangan: () => pemutarPasangan(bagian, selesai),
+    contohCerita: () => el('div', {},
+      bagian.pengantar ? el('p', {}, ...teksCampur(bagian.pengantar)) : null,
+      soalCerita(bagian.soal, () => selesai(), { contoh: true })),
     latihan: () => pemutarLatihan(konten, indeks, bagian, progres, selesai),
     kuis: () => pemutarKuis(konten, indeks, bagian, selesai),
   }[bagian.jenis];
@@ -153,24 +182,31 @@ function pemutarMateri(bagian, onSelesai) {
   return el('div', {}, isi, el('div', { class: 'langkah-navigasi' }, titik, posisi), el('div', { class: 'baris-tombol' }, mundur, maju));
 }
 
+/** Prompt penjelasan diri (GL04) setelah semua langkah dibuka — dapat dimatikan guru. */
+async function setelahContoh(bagian, wadahPrompt, onSelesai) {
+  const { promptPenjelasan } = await ambilPengaturanKelas();
+  if (bagian.prompt && promptPenjelasan) {
+    wadahPrompt.replaceChildren(el('div', { class: 'aktivitas' },
+      el('p', { class: 'aktivitas-label' }, 'Jelaskan!'),
+      renderButir({ tipe: 'pilihan', ...bagian.prompt }, onSelesai)));
+  } else onSelesai();
+}
+
 function pemutarContoh(bagian, onSelesai) {
   const langkah = bagian.langkah ?? langkahPenyelesaian(bagian.soal);
   const wadahPrompt = el('div', {});
   const isi = [];
   if (bagian.pengantar) isi.push(el('p', {}, ...teksCampur(bagian.pengantar)));
-  isi.push(langkahDemiLangkah({
-    langkah,
-    soal: bagian.soal,
-    onSelesai: () => {
-      // Prompt penjelasan diri (GL04) muncul setelah semua langkah dibuka
-      if (bagian.prompt) {
-        wadahPrompt.replaceChildren(el('div', { class: 'aktivitas' },
-          el('p', { class: 'aktivitas-label' }, 'Jelaskan!'),
-          renderButir({ tipe: 'pilihan', ...bagian.prompt }, onSelesai)));
-      } else onSelesai();
-    },
-  }));
+  isi.push(langkahDemiLangkah({ langkah, soal: bagian.soal, onSelesai: () => setelahContoh(bagian, wadahPrompt, onSelesai) }));
   return el('div', {}, ...isi, wadahPrompt);
+}
+
+function pemutarPasangan(bagian, onSelesai) {
+  const wadahPrompt = el('div', {});
+  return el('div', {},
+    bagian.pengantar ? el('p', {}, ...teksCampur(bagian.pengantar)) : null,
+    contohBerpasangan({ kiri: bagian.kiri, kanan: bagian.kanan, onSelesai: () => setelahContoh(bagian, wadahPrompt, onSelesai) }),
+    wadahPrompt);
 }
 
 function pemutarLatihan(konten, indeks, bagian, progres, onSelesai) {
@@ -210,6 +246,15 @@ function pemutarKuis(konten, indeks, bagian, onSelesai) {
       } }, i + 1 < daftarButir.length ? 'Lanjut →' : 'Lihat hasil');
       const butir = renderButir(item, ({ benarPertama, kode }) => {
         hasil.push({ item, benar: benarPertama, kode });
+        catatPercobaan({
+          modul: konten.id,
+          soal: item.soal ?? item.model ?? item.pertanyaan ?? item.tipe,
+          level: null,
+          fase: `kuis:${item.tipe}`,
+          benar: benarPertama,
+          kode,
+          pakaiPetunjuk: false,
+        });
         lanjut.hidden = false;
       });
       wadah.replaceChildren(

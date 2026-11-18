@@ -173,6 +173,11 @@ export function diagnosisModel(modelKunci, modelSiswa) {
 
 const BATAS_BAWAH_SEMESTA = { cacah: 0, asli: 1 };
 
+function memenuhiHasil(hasil, n) {
+  const b = Pecahan.dari(n).banding(hasil.nilai);
+  return { '<': b < 0, '<=': b <= 0, '>': b > 0, '>=': b >= 0 }[hasil.tanda];
+}
+
 /**
  * Nilai bulat ekstrem yang memenuhi hasil, mis. x ≤ 9,5 → 9 (paling banyak),
  * x > 82 → 83 (paling sedikit). Mengembalikan null bila tidak ada batas pada arah itu.
@@ -209,5 +214,10 @@ export function diagnosisTafsiran(hasil, semesta, jawabanSiswa) {
   const kata = semesta === 'bulat' ? 'bilangan bulat' : 'bilangan cacah';
   if (!siswa.bulat()) return salah('E8', `Jawabannya harus ${kata}. Berapa ${kata} ${hasil.tanda.startsWith('<') ? 'terbesar' : 'terkecil'} yang memenuhi?`);
   if (siswa.sama(hasil.nilai)) return salah('E8', `Tanda ${tampil(hasil.tanda)} berarti ${u(siswa)} tidak termasuk. Berapa ${kata} berikutnya yang memenuhi?`);
-  return salah('E3', 'Periksa lagi hitunganmu, lalu cari nilai yang paling sesuai dengan pertanyaan.');
+  const batas = `x ${tampil(hasil.tanda)} ${u(hasil.nilai)}`;
+  const arah = hasil.tanda.startsWith('<') ? 'terbesar' : 'terkecil';
+  if (!memenuhiHasil(hasil, siswa)) {
+    return salah('E8', `${u(siswa)} tidak memenuhi ${batas}. Cari ${kata} ${arah} yang memenuhi.`);
+  }
+  return salah('E8', `${u(siswa)} memang memenuhi ${batas}, tetapi bukan yang ${arah}. Perhatikan pertanyaannya.`);
 }

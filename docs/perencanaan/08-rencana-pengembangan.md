@@ -59,7 +59,21 @@ Sesuaikan dengan kalender akademik sekolah (hindari minggu ujian/libur).
 | Izin sekolah/orang tua untuk uji coba | Sedang | Tinggi | Urus surat izin sejak minggu 1; tidak mengumpulkan data pribadi |
 | Fitur terlalu banyak → tampilan ramai (bertentangan dengan EL03) | Sedang | Tinggi | Uji prototipe dengan siswa; patuhi daftar "sengaja tidak dimasukkan" (dokumen 02) |
 
-## 8.6 Alur Kerja Git
+## 8.6 Status Pelaksanaan (per 18 November 2026)
+
+| Tahap | Status | Hasil |
+|-------|--------|-------|
+| Sprint 0 — kerangka | ✅ Selesai | PWA dapat diinstal & offline, FastAPI, CI |
+| Sprint 1 — mesin matematika | ✅ Selesai | Parser, penyelesai, diagnosis E1–E8, generator, fading; diperiksa silang dengan SymPy |
+| Sprint 2 — komponen & M0–M3 | ✅ Selesai | Garis bilangan, papan tanda, contoh bertahap, kuis + remedial |
+| Sprint 3 — M4 & Lab | ✅ Selesai | Eksperimen + garis perbandingan beranimasi, contoh berpasangan, strategi alternatif, prompt penjelasan diri |
+| Sprint 4 — M5, M6 | ✅ Selesai | Bentuk beragam; soal cerita 5 tahap dengan stabilo dan diagnosis E7/E8 |
+| Sprint 5 — backend & dasbor | ✅ Selesai | Akun guru/siswa, kelas, sinkron idempoten, dasbor, ekspor CSV, skala Paas & Leppink, pengaturan tampilan |
+| Perangkat uji coba (minggu 12–16) | ✅ Disiapkan | Instrumen di [docs/instrumen/](../instrumen/README.md), skrip analisis di `tools/analisis/` |
+| Deploy ke hosting | ⏳ Menunggu | Perlu akun hosting milik peneliti; `Dockerfile` siap |
+| Wawancara tambahan, validasi ahli, uji coba di sekolah | ⏳ Menunggu | Kegiatan lapangan oleh peneliti |
+
+## 8.7 Alur Kerja Git
 
 - Cabang `main` selalu dapat di-*deploy*; fitur baru di cabang `fitur/<nama>`.
 - Pesan *commit* singkat berbahasa Indonesia, mis. `tambah diagnosis E1 dan E2`.

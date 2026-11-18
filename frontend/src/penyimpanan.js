@@ -72,16 +72,61 @@ const idAcak = () =>
 export async function catatPercobaan(data) {
   const catatan = { id: idAcak(), waktu: new Date().toISOString(), tersinkron: false, ...data };
   const db = await bukaDb();
-  if (!db) {
-    cadangan.percobaan.push(catatan);
-    return catatan;
-  }
   try {
+    if (!db) throw new Error('tanpa IndexedDB');
     await permintaan(db, 'percobaan', 'readwrite', (s) => s.put(catatan));
   } catch {
     cadangan.percobaan.push(catatan);
   }
+  // Memberi tahu modul sinkron (tanpa ketergantungan melingkar)
+  globalThis.dispatchEvent?.(new CustomEvent('percobaan-baru'));
   return catatan;
+}
+
+/** Semua catatan percobaan (urut waktu). */
+export async function ambilSemuaPercobaan() {
+  const db = await bukaDb();
+  if (!db) return [...cadangan.percobaan];
+  try {
+    const semua = await permintaan(db, 'percobaan', 'readonly', (s) => s.getAll());
+    return [...(semua ?? []), ...cadangan.percobaan].sort((a, b) => a.waktu.localeCompare(b.waktu));
+  } catch {
+    return [...cadangan.percobaan];
+  }
+}
+
+/** Menandai catatan yang sudah terkirim ke server. */
+export async function tandaiTersinkron(ids) {
+  const db = await bukaDb();
+  const set = new Set(ids);
+  for (const c of cadangan.percobaan) if (set.has(c.id)) c.tersinkron = true;
+  if (!db || !ids.length) return;
+  await permintaan(db, 'percobaan', 'readwrite', (s) => {
+    for (const id of ids) {
+      const r = s.get(id);
+      r.onsuccess = () => r.result && s.put({ ...r.result, tersinkron: true });
+    }
+    return null;
+  });
+}
+
+// --------------------------------------------------------- skala beban kognitif
+
+/** Menyimpan jawaban skala beban kognitif (Paas / Leppink) untuk dikirim ke server. */
+export async function catatSkala(data) {
+  const daftar = await ambil('skalaBeban', []);
+  daftar.push({ id: idAcak(), waktu: new Date().toISOString(), tersinkron: false, ...data });
+  await simpan('skalaBeban', daftar);
+}
+
+export async function ambilSkalaBelumTerkirim() {
+  return (await ambil('skalaBeban', [])).filter((s) => !s.tersinkron);
+}
+
+export async function tandaiSkalaTersinkron(ids) {
+  const set = new Set(ids);
+  const daftar = (await ambil('skalaBeban', [])).map((s) => (set.has(s.id) ? { ...s, tersinkron: true } : s));
+  await simpan('skalaBeban', daftar);
 }
 
 // ------------------------------------------------------------- progres modul

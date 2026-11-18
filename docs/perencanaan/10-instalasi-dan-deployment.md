@@ -17,8 +17,8 @@
 cd backend
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install fastapi "uvicorn[standard]" sqlmodel pyjwt "passlib[bcrypt]" python-dotenv
-pip freeze > requirements.txt
+pip install -r requirements-dev.txt
+copy .env.example .env      # lalu isi SECRET_KEY
 uvicorn app.main:app --reload --port 8000
 # Dokumentasi API: http://localhost:8000/docs
 ```
@@ -26,10 +26,7 @@ uvicorn app.main:app --reload --port 8000
 **Frontend (JavaScript/Vite):**
 ```powershell
 cd frontend
-npm create vite@latest . -- --template vanilla
 npm install
-npm install -D vite-plugin-pwa
-npm install idb katex
 npm run dev
 # Buka: http://localhost:5173
 ```
@@ -68,7 +65,15 @@ Kelebihan: frontend sangat cepat dan tetap hidup walau backend sedang tidur (sis
 
 > Ketentuan paket gratis layanan hosting sering berubah (mis. server "tidur" setelah tidak aktif). Periksa kebijakan terbaru sebelum uji coba, dan uji sehari sebelum dipakai di kelas.
 
-**Basis data:** SQLite cukup untuk uji coba 1–2 kelas. Jika host tidak menyimpan file secara permanen (beberapa layanan gratis menghapus disk saat *restart*), gunakan PostgreSQL terkelola (mis. Neon, Supabase, atau PostgreSQL dari layanan host).
+### Opsi C — Docker (satu image, paling mudah dipindah antar hosting)
+`Dockerfile` di akar proyek mem-build frontend lalu memasangnya bersama FastAPI:
+```bash
+docker build -t tandatepat .
+docker run -p 8000:8000 -e SECRET_KEY="<teks acak 48 karakter>" -v tandatepat-data:/data tandatepat
+```
+Hampir semua layanan hosting (Render, Railway, Fly.io, VPS) dapat menjalankan image ini langsung dari repositori GitHub. Basis data SQLite disimpan di volume `/data`; pastikan layanan yang dipilih menyediakan **disk permanen**, atau gunakan PostgreSQL.
+
+**Basis data:** SQLite cukup untuk uji coba 1–2 kelas. Jika host tidak menyimpan file secara permanen (beberapa layanan gratis menghapus disk saat *restart*), gunakan PostgreSQL terkelola (mis. Neon, Supabase, atau PostgreSQL dari layanan host). Untuk PostgreSQL, tambahkan `psycopg[binary]` ke `backend/requirements.txt` dan isi `DATABASE_URL=postgresql+psycopg://user:sandi@host:5432/tandatepat`.
 
 ## 10.4 Cara Siswa Menginstal Aplikasi (tanpa Play Store / App Store)
 

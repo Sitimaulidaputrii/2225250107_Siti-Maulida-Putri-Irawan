@@ -9,7 +9,9 @@ import { catatJawaban, langkahDikosongkan, selesaiContoh } from '../engine/adapt
 import { diagnosisJawaban } from '../engine/diagnosis.js';
 import { acakBerbenih, buatSoal } from '../engine/generator.js';
 import { parsePertidaksamaan } from '../engine/parser.js';
+import { ambilPengaturanKelas } from '../pengaturan.js';
 import { catatPercobaan } from '../penyimpanan.js';
+import { renderButir } from './soal.js';
 import { tampilMatematika, teksRapi } from '../ui/matematika.js';
 import { barisLangkah, langkahDemiLangkah } from './langkahDemiLangkah.js';
 import { papanTanda } from './papanTanda.js';
@@ -80,6 +82,25 @@ export function latihan({ status, pengaturan, lewatiContoh, onSimpan, onTuntas, 
   const targetLevel = status.level;
   const wadah = el('div', { class: 'latihan' });
   const opsiGenerator = { hanya: pengaturan.hanya };
+  let promptAktif = true;
+  ambilPengaturanKelas().then((k) => (promptAktif = k.promptPenjelasan));
+
+  /** Prompt penjelasan diri (F9) setelah soal yang tandanya dibalik, di fase berbantuan. */
+  function promptPenjelasan() {
+    return el('div', { class: 'aktivitas' },
+      el('p', { class: 'aktivitas-label' }, 'Jelaskan!'),
+      renderButir({
+        tipe: 'pilihan',
+        pertanyaan: 'Mengapa pada soal ini tandanya dibalik?',
+        opsi: [
+          'Karena kedua ruas dibagi atau dikali bilangan negatif',
+          'Karena hasil akhirnya bilangan negatif',
+          'Karena ada konstanta yang dipindahkan',
+        ],
+        benar: 0,
+        umpan: [null, 'Hasil negatif tidak membuat tanda dibalik. Lihat langkah yang berwarna oranye.', 'Memindahkan konstanta tidak mengubah tanda. Lihat langkah yang berwarna oranye.'],
+      }));
+  }
 
   if (status.fase === 'contoh' && lewatiContoh) {
     status = selesaiContoh(status).status;
@@ -145,7 +166,7 @@ export function latihan({ status, pengaturan, lewatiContoh, onSimpan, onTuntas, 
     const area = el('div', { class: 'latihan-area' });
     const umpan = el('div', { class: 'umpan', role: 'status', 'aria-live': 'polite', hidden: true });
     const kotakPetunjuk = el('div', { class: 'petunjuk', hidden: true });
-    const tombolPetunjuk = el('button', { type: 'button', class: 'tombol tombol-kedua', onclick: mintaPetunjuk }, '💡 Petunjuk');
+    const tombolPetunjuk = el('button', { type: 'button', class: 'tombol tombol-kedua', onclick: mintaPetunjuk }, '🧭 Mulai dari mana?');
     const tombolBerikut = el('button', { type: 'button', class: 'tombol', hidden: true, onclick: soalBaru }, 'Soal berikutnya →');
 
     function mintaPetunjuk() {
@@ -204,8 +225,12 @@ export function latihan({ status, pengaturan, lewatiContoh, onSimpan, onTuntas, 
           onKirim(jawaban) {
             const d = diagnosisJawaban(soal.soal, jawaban);
             if (d.benar) {
+              const faseSebelum = status.fase;
               tampilUmpan(true);
               selesaiSoal(nilaiAkhir(true, null));
+              if (promptAktif && faseSebelum !== 'mandiri' && langkah.some((l) => l.dibalik)) {
+                umpan.after(promptPenjelasan());
+              }
             } else {
               const peristiwa = nilaiAkhir(false, d.kode);
               tampilUmpan(false, d.pesan);

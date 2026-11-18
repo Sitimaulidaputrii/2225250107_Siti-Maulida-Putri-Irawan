@@ -11,7 +11,7 @@
 | Matematika tampilan | **KaTeX** | Ringan, dapat di-*cache* untuk *offline* |
 | Backend | **Python 3.12 + FastAPI** | Cepat, dokumentasi API otomatis (Swagger), cocok untuk pemula Python |
 | ORM & DB | **SQLModel** + **SQLite** (pengembangan/uji coba kecil) → **PostgreSQL** (bila pengguna banyak) | Mudah dimulai, dapat ditingkatkan |
-| Autentikasi | JWT (`python-jose` / `pyjwt`), hash `bcrypt` / `argon2` | Standar & aman |
+| Autentikasi | JWT (PyJWT), hash **scrypt** (`hashlib` bawaan Python) | Standar & aman, tanpa pustaka tambahan |
 | Alat konten | **Python + SymPy** | Memvalidasi kunci jawaban & membuat soal acak secara otomatis |
 | Pengujian | `pytest` (Python), `vitest` (JS), Playwright (uji ujung-ke-ujung, opsional) | |
 | Versi kode | Git + GitHub | Riwayat & kolaborasi dengan pembimbing |
@@ -178,6 +178,7 @@ store "antrean"    : permintaan API yang menunggu daring
 | POST | `/api/auth/siswa/gabung` | Siswa gabung kelas (kode kelas, nama panggilan, PIN) → JWT | Publik |
 | POST | `/api/auth/siswa/masuk` | Masuk siswa (kode kelas, nama panggilan, PIN) | Publik |
 | GET | `/api/konten/versi` | Versi konten terbaru | Publik |
+| GET | `/api/kelas/saya` | Kelas & pengaturan kelas siswa (dipakai saat sinkron) | Siswa |
 | POST | `/api/progres/percobaan` | Kirim kumpulan percobaan (batch) | Siswa |
 | GET | `/api/progres/saya` | Ringkasan penguasaan | Siswa |
 | POST | `/api/progres/skala-beban` | Kirim skor beban kognitif | Siswa |

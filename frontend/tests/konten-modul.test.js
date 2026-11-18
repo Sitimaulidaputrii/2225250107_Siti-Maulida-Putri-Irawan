@@ -6,9 +6,11 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { Pecahan } from '../src/engine/pecahan.js';
 import { parsePertidaksamaan } from '../src/engine/parser.js';
-import { langkahPenyelesaian, selesaikan } from '../src/engine/penyelesai.js';
+import { ekuivalen, langkahPenyelesaian, selesaikan } from '../src/engine/penyelesai.js';
 import { buatSoal } from '../src/engine/generator.js';
 import { DAFTAR_MODUL } from '../src/modul.js';
+import { nilaiBulatEkstrem } from '../src/engine/diagnosis.js';
+import { indeksPenting } from '../src/components/soalCerita.js';
 
 const folder = new URL('../public/konten/', import.meta.url);
 const berkas = readdirSync(folder).filter((f) => /^modul-M\d\.json$/.test(f));
@@ -52,6 +54,19 @@ function cekButir(b, lokasi) {
       expect(Pecahan.dari(b.operasi.nilai).nol(), `${di}: operasi dengan nol`).toBe(false);
       break;
     }
+    case 'cerita': {
+      expect(selesaikan(b.model).jenis, `${di}: model`).toBe('batas');
+      const benar = b.opsi_model.filter((o) => ekuivalen(o, b.model));
+      expect(benar, `${di}: tepat satu opsi model yang benar`).toHaveLength(1);
+      expect(b.misalkan.benar >= 0 && b.misalkan.benar < b.misalkan.opsi.length, `${di}: misalkan`).toBe(true);
+      const kata = b.teks.split(/\s+/);
+      const ketemu = indeksPenting(kata, b.token_penting);
+      expect(ketemu.size, `${di}: semua token_penting ada di teks`).toBe(b.token_penting.length);
+      expect(['real', 'bulat', 'cacah', 'asli'], di).toContain(b.semesta);
+      if (b.semesta !== 'real') expect(nilaiBulatEkstrem(selesaikan(b.model)), `${di}: tafsiran`).not.toBeNull();
+      expect(b.tanya_tafsir && b.tafsiran, `${di}: tafsiran`).toBeTruthy();
+      break;
+    }
     default:
       throw new Error(`${di}: tipe butir tidak dikenal`);
   }
@@ -86,8 +101,18 @@ describe('konten modul', () => {
             if (s.aktivitas) cekButir(s.aktivitas, `${lokasi}/segmen ${j}`);
           });
         } else if (bag.jenis === 'contoh') {
-          const langkah = langkahPenyelesaian(bag.soal);
+          const langkah = bag.langkah ?? langkahPenyelesaian(bag.soal);
           expect(langkah.length, lokasi).toBeGreaterThan(1);
+          // Langkah yang ditulis manual harus ekuivalen dengan soal (tidak ada langkah keliru)
+          for (const l of langkah) expect(ekuivalen(l.ekspresi, bag.soal), `${lokasi}: ${l.ekspresi}`).toBe(true);
+          if (bag.prompt) cekButir({ tipe: 'pilihan', ...bag.prompt }, `${lokasi}/prompt`);
+        } else if (bag.jenis === 'contohCerita') {
+          cekButir(bag.soal, `${lokasi}/contoh`);
+        } else if (bag.jenis === 'pasangan') {
+          for (const s of [bag.kiri, bag.kanan]) {
+            expect(s.label, lokasi).toBeTruthy();
+            expect(selesaikan(s.soal).jenis, lokasi).toBe('batas');
+          }
           if (bag.prompt) cekButir({ tipe: 'pilihan', ...bag.prompt }, `${lokasi}/prompt`);
         } else if (bag.jenis === 'latihan') {
           expect(() => buatSoal(bag.level, undefined, { hanya: bag.hanya }), lokasi).not.toThrow();

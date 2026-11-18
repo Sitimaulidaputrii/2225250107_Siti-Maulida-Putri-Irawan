@@ -101,7 +101,12 @@ describe('tafsiran & semesta (E8)', () => {
   it('soal buku: paling banyak 9 buku', () => {
     const h = selesaikan('14000 + 4000x <= 50000');
     expect(diagnosisTafsiran(h, 'cacah', 9).benar).toBe(true);
-    expect(diagnosisTafsiran(h, 'cacah', 8).kode).toBe('E3');
+    const kecil = diagnosisTafsiran(h, 'cacah', 8);
+    expect(kecil.kode).toBe('E8');
+    expect(kecil.pesan).toContain('bukan yang terbesar');
+    const lewat = diagnosisTafsiran(h, 'cacah', 12);
+    expect(lewat.kode).toBe('E8');
+    expect(lewat.pesan).toContain('tidak memenuhi');
   });
 
   it('E8 — jawaban bukan bilangan cacah', () => {

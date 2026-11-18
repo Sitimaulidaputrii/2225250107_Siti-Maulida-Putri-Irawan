@@ -45,6 +45,13 @@ function statusModul(p) {
   return p.selesai.length > 0 ? 'sedang' : 'belum';
 }
 
+const ALAT = [
+  { href: '#/lab', judul: '🔬 Lab Garis Bilangan', ringkas: 'Coba sendiri: kapan tanda dibalik?' },
+  { href: '#/latihan', judul: '🎯 Latihan Bebas', ringkas: 'Soal acak tanpa batas' },
+  { href: '#/progres', judul: '📈 Progresku', ringkas: 'Kemajuan & yang perlu diperkuat' },
+  { href: '#/pengaturan', judul: '⚙️ Pengaturan', ringkas: 'Tampilan & gabung kelas' },
+];
+
 const TANDA_STATUS = { selesai: '✔', sedang: '◐', belum: '' };
 const ARIA_STATUS = { selesai: 'selesai', sedang: 'sedang dipelajari', belum: 'belum dimulai' };
 
@@ -87,6 +94,13 @@ export function beranda() {
     lanjutkan,
     el('h2', {}, 'Modul'),
     daftar,
-    el('p', { class: 'kaki' }, el('a', { href: '#/tentang' }, 'Tentang aplikasi')),
+    el('h2', {}, 'Alat'),
+    el('ul', { class: 'daftar-alat' }, ...ALAT.map((a) =>
+      el('li', {}, el('a', { href: a.href, class: 'alat' },
+        el('span', { class: 'alat-judul' }, a.judul),
+        el('span', { class: 'alat-ringkas' }, a.ringkas))))),
+    el('p', { class: 'kaki' },
+      el('a', { href: '#/tentang' }, 'Tentang aplikasi'), ' · ',
+      el('a', { href: '#/guru' }, 'Untuk guru')),
   );
 }
